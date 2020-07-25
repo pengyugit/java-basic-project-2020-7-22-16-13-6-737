@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CreditCardTest {
+public class PayTest {
     @Before
     public void initialize() {
         Pay.clearPoints();
@@ -80,4 +80,14 @@ public class CreditCardTest {
 
         Assert.assertEquals(32 ,Pay.getPoints());
     }
+
+    @Test
+    public void should_return_15_points_when_cost_100_by_creditPay(){
+        Pay creditPay = new CreditPay();
+
+        creditPay.cost(100);
+
+        Assert.assertEquals(15 ,Pay.getPoints());
+    }
+
 }
