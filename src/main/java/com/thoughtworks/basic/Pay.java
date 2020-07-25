@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public abstract class Pay {
-    private int points;
+    private static int points;
 
     abstract void cost(int money);
 
@@ -16,8 +16,12 @@ public abstract class Pay {
         System.out.println(costInfo);
     }
 
-    public int getPoints(){
+    public static int getPoints(){
         System.out.println("总积分："+points);
         return points;
+    }
+
+    public static void clearPoints() {
+        points = 0;
     }
 }
