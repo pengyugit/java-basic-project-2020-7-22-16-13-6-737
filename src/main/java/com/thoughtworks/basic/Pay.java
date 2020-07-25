@@ -5,6 +5,11 @@ import java.util.Date;
 
 public abstract class Pay {
     private static int points;
+    private User user;
+
+    public Pay(User user) {
+        this.user = user;
+    }
 
     abstract void cost(int money);
 
@@ -19,6 +24,10 @@ public abstract class Pay {
     public static int getPoints(){
         System.out.println("总积分："+points);
         return points;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public static void clearPoints() {

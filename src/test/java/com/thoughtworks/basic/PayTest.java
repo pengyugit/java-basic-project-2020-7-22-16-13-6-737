@@ -11,7 +11,7 @@ public class PayTest {
     }
     @Test
     public void should_return_1_points_when_cost_11_by_pos(){
-        Pay posPay = new PosPay();
+        Pay posPay = new PosPay(new CommonUser());
 
         posPay.cost(11);
 
@@ -20,7 +20,7 @@ public class PayTest {
 
     @Test
     public void should_return_1_points_when_cost_108_by_pos(){
-        Pay posPay = new PosPay();
+        Pay posPay = new PosPay(new CommonUser());
 
         posPay.cost(108);
 
@@ -29,7 +29,7 @@ public class PayTest {
 
     @Test
     public void should_return_1_points_when_cost_208_by_pos(){
-        Pay posPay = new PosPay();
+        Pay posPay = new PosPay(new CommonUser());
 
         posPay.cost(208);
 
@@ -38,7 +38,7 @@ public class PayTest {
 
     @Test
     public void should_return_0_points_when_cost_8_by_pos(){
-        Pay posPay = new PosPay();
+        Pay posPay = new PosPay(new CommonUser());
 
         posPay.cost(8);
 
@@ -47,7 +47,7 @@ public class PayTest {
 
     @Test
     public void should_return_30_points_when_costs_by_pos(){
-        Pay posPay = new PosPay();
+        Pay posPay = new PosPay(new CommonUser());
 
         posPay.cost(208);
         posPay.cost(108);
@@ -59,7 +59,7 @@ public class PayTest {
 
     @Test
     public void should_return_1_points_when_cost_25_by_wechart(){
-        Pay weChartPay = new WeChartPay();
+        Pay weChartPay = new WeChartPay(new CommonUser());
 
         weChartPay.cost(25);
 
@@ -68,8 +68,8 @@ public class PayTest {
 
     @Test
     public void should_return_32_points_when_costs_by_pos_and_wechart(){
-        Pay posPay = new PosPay();
-        Pay weChartPay = new WeChartPay();
+        Pay posPay = new PosPay(new CommonUser());
+        Pay weChartPay = new WeChartPay(new CommonUser());
 
         weChartPay.cost(25);
         weChartPay.cost(18);
@@ -83,7 +83,7 @@ public class PayTest {
 
     @Test
     public void should_return_15_points_when_cost_100_by_creditPay(){
-        Pay creditPay = new CreditPay();
+        Pay creditPay = new CreditPay(new CommonUser());
 
         creditPay.cost(100);
 
@@ -91,7 +91,7 @@ public class PayTest {
     }
     @Test
     public void should_return_320_points_when_cost_2208_by_creditPay(){
-        Pay creditPay = new CreditPay();
+        Pay creditPay = new CreditPay(new CommonUser());
 
         creditPay.cost(2208);
 
@@ -99,9 +99,9 @@ public class PayTest {
     }
     @Test
     public void should_return_320_points_when_costs_by_pos_and_wechart_and_creditPay(){
-        Pay posPay = new PosPay();
-        Pay weChartPay = new WeChartPay();
-        Pay creditPay = new CreditPay();
+        Pay posPay = new PosPay(new CommonUser());
+        Pay weChartPay = new WeChartPay(new CommonUser());
+        Pay creditPay = new CreditPay(new CommonUser());
 
         creditPay.cost(2208);
         creditPay.cost(208);
@@ -117,7 +117,7 @@ public class PayTest {
 
     @Test
     public void should_return_740_points_when_cost_6400_by_creditInstallmentPay(){
-        Pay creditInstallmentPay = new CreditInstallmentPay();
+        Pay creditInstallmentPay = new CreditInstallmentPay(new CommonUser());
 
         creditInstallmentPay.cost(6400);
 
@@ -125,10 +125,10 @@ public class PayTest {
     }
     @Test
     public void should_return_1122_points_when_costs_by_pos_and_wechart_and_creditPay_and_creditInstallmentPay(){
-        Pay posPay = new PosPay();
-        Pay weChartPay = new WeChartPay();
-        Pay creditPay = new CreditPay();
-        Pay creditInstallmentPay = new CreditInstallmentPay();
+        Pay posPay = new PosPay(new CommonUser());
+        Pay weChartPay = new WeChartPay(new CommonUser());
+        Pay creditPay = new CreditPay(new CommonUser());
+        Pay creditInstallmentPay = new CreditInstallmentPay(new CommonUser());
 
         creditInstallmentPay.cost(6400);
         creditPay.cost(2208);
@@ -141,5 +141,25 @@ public class PayTest {
         weChartPay.cost(25);
 
         Assert.assertEquals(1122 ,Pay.getPoints());
+    }
+
+    @Test
+    public void should_return_result_points_when_costs_by_goldenUser(){
+        Pay posPay = new PosPay(new GoldenUser());
+        Pay weChartPay = new WeChartPay(new GoldenUser());
+        Pay creditPay = new CreditPay(new GoldenUser());
+        Pay creditInstallmentPay = new CreditInstallmentPay(new GoldenUser());
+
+        creditInstallmentPay.cost(6400);
+        creditPay.cost(2208);
+        creditPay.cost(208);
+        posPay.cost(208);
+        weChartPay.cost(22);
+        weChartPay.cost(10);
+        posPay.cost(108);
+        weChartPay.cost(18);
+        weChartPay.cost(25);
+
+        Assert.assertEquals(1577 ,Pay.getPoints());
     }
 }

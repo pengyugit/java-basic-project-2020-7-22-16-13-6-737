@@ -6,11 +6,17 @@ import java.util.Date;
 public class PosPay extends Pay {
     private static String PAY_TYPE = "POS机";
 
-    @Override
-    public void cost(int money) {
-        int point = money/10;
-        super.record(money,point,PAY_TYPE);
+    public PosPay(User user) {
+        super(user);
     }
 
+    @Override
+    void cost(int money) {
+        int points = super.getUser().calculatePoints(getBasePoint(money));
+        super.record(money,points,PAY_TYPE);
+    }
 
+    public int getBasePoint(int money){
+        return money/10;
+    }
 }
