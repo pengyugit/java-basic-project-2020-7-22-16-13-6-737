@@ -14,6 +14,7 @@ public class PayTest {
         Pay posPay = new PosPay(new CommonUser());
 
         posPay.cost(11);
+        Pay.printPayInfo(new ConsolePrint());
 
         Assert.assertEquals(1 ,Pay.getPoints());
     }
@@ -23,6 +24,7 @@ public class PayTest {
         Pay posPay = new PosPay(new CommonUser());
 
         posPay.cost(108);
+        Pay.printPayInfo(new ConsolePrint());
 
         Assert.assertEquals(10 ,Pay.getPoints());
     }
@@ -32,6 +34,7 @@ public class PayTest {
         Pay posPay = new PosPay(new CommonUser());
 
         posPay.cost(208);
+        Pay.printPayInfo(new ConsolePrint());
 
         Assert.assertEquals(20 ,Pay.getPoints());
     }
@@ -41,6 +44,7 @@ public class PayTest {
         Pay posPay = new PosPay(new CommonUser());
 
         posPay.cost(8);
+        Pay.printPayInfo(new ConsolePrint());
 
         Assert.assertEquals(0 ,Pay.getPoints());
     }
@@ -52,6 +56,7 @@ public class PayTest {
         posPay.cost(208);
         posPay.cost(108);
         posPay.cost(8);
+        Pay.printPayInfo(new ConsolePrint());
 
         Assert.assertEquals(30 ,Pay.getPoints());
     }
@@ -62,6 +67,7 @@ public class PayTest {
         Pay weChartPay = new WeChartPay(new CommonUser());
 
         weChartPay.cost(25);
+        Pay.printPayInfo(new ConsolePrint());
 
         Assert.assertEquals(1 ,Pay.getPoints());
     }
@@ -77,6 +83,7 @@ public class PayTest {
         weChartPay.cost(10);
         weChartPay.cost(22);
         posPay.cost(208);
+        Pay.printPayInfo(new ConsolePrint());
 
         Assert.assertEquals(32 ,Pay.getPoints());
     }
@@ -86,6 +93,7 @@ public class PayTest {
         Pay creditPay = new CreditPay(new CommonUser());
 
         creditPay.cost(100);
+        Pay.printPayInfo(new ConsolePrint());
 
         Assert.assertEquals(15 ,Pay.getPoints());
     }
@@ -94,6 +102,7 @@ public class PayTest {
         Pay creditPay = new CreditPay(new CommonUser());
 
         creditPay.cost(2208);
+        Pay.printPayInfo(new ConsolePrint());
 
         Assert.assertEquals(320 ,Pay.getPoints());
     }
@@ -111,6 +120,7 @@ public class PayTest {
         posPay.cost(108);
         weChartPay.cost(18);
         weChartPay.cost(25);
+        Pay.printPayInfo(new ConsolePrint());
 
         Assert.assertEquals(382 ,Pay.getPoints());
     }
@@ -120,6 +130,7 @@ public class PayTest {
         Pay creditInstallmentPay = new CreditInstallmentPay(new CommonUser());
 
         creditInstallmentPay.cost(6400);
+        Pay.printPayInfo(new ConsolePrint());
 
         Assert.assertEquals(740 ,Pay.getPoints());
     }
@@ -139,6 +150,7 @@ public class PayTest {
         posPay.cost(108);
         weChartPay.cost(18);
         weChartPay.cost(25);
+        Pay.printPayInfo(new ConsolePrint());
 
         Assert.assertEquals(1122 ,Pay.getPoints());
     }
@@ -159,7 +171,30 @@ public class PayTest {
         posPay.cost(108);
         weChartPay.cost(18);
         weChartPay.cost(25);
+        Pay.printPayInfo(new ConsolePrint());
 
         Assert.assertEquals(1577 ,Pay.getPoints());
     }
+
+    @Test
+    public void should_return_result_points_when_costs_by_goldenUser_by_HtmlPrint(){
+        Pay posPay = new PosPay(new GoldenUser());
+        Pay weChartPay = new WeChartPay(new GoldenUser());
+        Pay creditPay = new CreditPay(new GoldenUser());
+        Pay creditInstallmentPay = new CreditInstallmentPay(new GoldenUser());
+
+        creditInstallmentPay.cost(6400);
+        creditPay.cost(2208);
+        creditPay.cost(208);
+        posPay.cost(208);
+        weChartPay.cost(22);
+        weChartPay.cost(10);
+        posPay.cost(108);
+        weChartPay.cost(18);
+        weChartPay.cost(25);
+        Pay.printPayInfo(new HtmlPrint());
+
+        Assert.assertEquals(1577 ,Pay.getPoints());
+    }
+
 }
