@@ -1,15 +1,16 @@
 package com.thoughtworks.basic;
 
-public class PosPay implements Pay {
-    private int points;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class PosPay extends Pay {
+    private static String PAY_TYPE = "POS机";
 
     @Override
     public void cost(int money) {
-        points += money/10;
+        int point = money/10;
+        super.record(money,point,PAY_TYPE);
     }
 
-    @Override
-    public int getPoints() {
-        return points;
-    }
+
 }
