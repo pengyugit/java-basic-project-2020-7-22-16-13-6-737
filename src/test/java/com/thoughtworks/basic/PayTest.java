@@ -114,4 +114,32 @@ public class PayTest {
 
         Assert.assertEquals(382 ,Pay.getPoints());
     }
+
+    @Test
+    public void should_return_740_points_when_cost_6400_by_creditInstallmentPay(){
+        Pay creditInstallmentPay = new CreditInstallmentPay();
+
+        creditInstallmentPay.cost(6400);
+
+        Assert.assertEquals(740 ,Pay.getPoints());
+    }
+    @Test
+    public void should_return_1122_points_when_costs_by_pos_and_wechart_and_creditPay_and_creditInstallmentPay(){
+        Pay posPay = new PosPay();
+        Pay weChartPay = new WeChartPay();
+        Pay creditPay = new CreditPay();
+        Pay creditInstallmentPay = new CreditInstallmentPay();
+
+        creditInstallmentPay.cost(6400);
+        creditPay.cost(2208);
+        creditPay.cost(208);
+        posPay.cost(208);
+        weChartPay.cost(22);
+        weChartPay.cost(10);
+        posPay.cost(108);
+        weChartPay.cost(18);
+        weChartPay.cost(25);
+
+        Assert.assertEquals(1122 ,Pay.getPoints());
+    }
 }
